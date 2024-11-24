@@ -96,7 +96,7 @@ const Dashboard = () => {
           className={`${card.bg} text-white shadow-lg rounded-lg p-8 border w-full sm:w-3/4 md:w-3/5 mx-auto mb-4`}>
           <div className="flex justify-between items-center">
             <h2 className="text-3xl font-semibold mb-2">{card.role}</h2>
-            <img src={USER_CONFIG} alt="userconfig" className="w-8 sm:w-10 md:w-12" />
+            <img src={USER_CONFIG} alt="userconfig" className="w-8 sm:w-10 md:w-10" />
           </div>
           <div className="flex items-center gap-4 my-4">
             <img src={KEY_ICON} alt="key" className="w-6 sm:w-8" />

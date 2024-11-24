@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { validateEmail, validatePassword } from "./utils/validate";
+import { validateEmail, validatePassword } from "../utils/validate";
+import Axios from 'axios';
 
 const Signup = () => {
     const [errorMessage, setErrorMessage] = useState(null);
@@ -11,6 +12,7 @@ const Signup = () => {
     const [nameError, setNameError] = useState(null);
     const [emailError, setEmailError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleNameChange = (e) => {
         const value = e.target.value;
@@ -36,7 +38,21 @@ const Signup = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
         if (!nameError && !emailError && !passwordError) {
-            console.log("Sign-up successful.");
+            try {
+                const dataToSend = {
+                    name: name.current.value,
+                    email: email.current.value,
+                    password: password.current.value,
+                    role: "Super Admin",
+                };
+
+                await Axios.post("http://localhost:3000/register", dataToSend, {
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                navigate('/');
+            } catch (error) {
+                console.error("Error posting data:", error);
+            }
         } else {
             setErrorMessage("Please fix the validation errors before proceeding.");
         }
@@ -72,16 +88,26 @@ const Signup = () => {
                 />
                 {emailError && <p className="text-red-500 text-sm mb-2">{emailError}</p>}
                 <label className="font-bold text-lg">Password</label>
-                <input
-                    ref={password}
-                    type="password"
-                    onChange={handlePasswordChange}
-                    className="mb-4 p-2 w-full bg-gray-500 bg-opacity-30 rounded-lg"
-                    required
-                />
+                <div className="relative">
+                    <input
+                        ref={password}
+                        type={showPassword ? "text" : "password"}
+                        onChange={handlePasswordChange}
+                        className="mb-4 p-2 w-full bg-gray-500 bg-opacity-30 rounded-lg"
+                        required
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-2 top-[10%] text-black"
+                    >
+                        {showPassword ? "Hide" : "Show"}
+                    </button>
+                </div>
                 {passwordError && (
                     <p className="text-red-500 text-sm mb-2">{passwordError}</p>
                 )}
+
                 {errorMessage && (
                     <p className="my-4 font-bold text-lg text-red-500">{errorMessage}</p>
                 )}
@@ -93,7 +119,7 @@ const Signup = () => {
                 </button>
                 <p
                     className="my-4 cursor-pointer font-bold text-base text-center"
-                    onClick={() => navigate("/login")}
+                    onClick={() => navigate("/")}
                 >
                     Already Registered? Sign In Now
                 </p>

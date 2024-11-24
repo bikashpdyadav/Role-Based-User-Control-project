@@ -4,7 +4,7 @@ import UserDetails from "./UserDetails";
 
 const Header = ({ toggleSidebar, showSidebar }) => {
   return (
-    <div className={`fixed p-4 bg-white transition-all duration-300 ${showSidebar ? `w-[92%]`:`w-full`}`}>
+    <div className={`fixed p-4 bg-white transition-all duration-300 ${showSidebar ? `w-[90%]`:`w-full`}`}>
       <header
       className='flex justify-end lg:justify-between items-center'
     >

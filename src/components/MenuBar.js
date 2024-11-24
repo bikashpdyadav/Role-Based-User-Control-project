@@ -23,21 +23,7 @@ const MenuBar = ({ setActiveTab }) => {
         onClick={() => setActiveTab('roles')}
       >
         <FaFilm className="text-lg sm:text-xl" />
-        <span className="text-xs sm:text-sm mt-1">Roles</span>
-      </div>
-      <div
-        className="menu-item flex flex-col items-center cursor-pointer transition-transform duration-200 hover:scale-110"
-        onClick={() => setActiveTab('permissions')}
-      >
-        <FaTv className="text-lg sm:text-xl" />
-        <span className="text-xs sm:text-sm mt-1">Permissions</span>
-      </div>
-      <div
-        className="menu-item flex flex-col items-center cursor-pointer transition-transform duration-200 hover:scale-110"
-        onClick={() => setActiveTab('myspace')}
-      >
-        <FaUser className="text-lg sm:text-xl" />
-        <span className="text-xs sm:text-sm mt-1">MySpace</span>
+        <span className="text-xs sm:text-sm mt-1">Add Users</span>
       </div>
     </div>
   );
